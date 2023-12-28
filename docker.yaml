@@ -39,20 +39,20 @@
           path: /etc/containerd/config.toml
           state: absent
 
-   - name: Start Docker service
-       service:
-         name: docker
-         state: started
-         enabled: yes
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
 
-   - name: Start Containerd service
-       service:
-         name: containerd
-         state: started
-         enabled: yes
+    - name: Start Containerd service
+      service:
+        name: containerd
+        state: started
+        enabled: yes
   
-   - name: Add user robert to docker group
-       user:
-         name: robert
-         groups: docker
-         append: yes
+    - name: Add user robert to docker group
+      user:
+        name: robert
+        groups: docker
+        append: yes
