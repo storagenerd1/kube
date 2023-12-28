@@ -1,0 +1,60 @@
+---
+- name: Configure Firewalld
+  hosts: your_target_hosts
+  become: true  # Run tasks with elevated privileges
+
+  tasks:
+    - name: Add a rule to allow incoming traffic on port 80
+      ansible.builtin.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Add a rule to allow incoming traffic on port 443
+      ansible.builtin.firewalld:
+        service: https
+        permanent: yes
+        state: enabled
+        immediate: yes
+        
+    - name: Add a rule to allow incoming traffic on port 6443
+      ansible.builtin.firewalld:
+        port: "6443/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+        
+    - name: Add a rule to allow incoming traffic on port 2379-2380
+      ansible.builtin.firewalld:
+        port: "2379-2380/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Add a rule to allow incoming traffic on port 7472
+      ansible.builtin.firewalld:
+        port: "7472/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+        
+    - name: Add a rule to allow incoming traffic on port 10250-10252
+      ansible.builtin.firewalld:
+        port: "10250-10252/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Add a rule to allow incoming traffic on port 30000-32767
+      ansible.builtin.firewalld:
+        port: "30000-32767/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Reload Firewalld to apply changes
+      ansible.builtin.systemd:
+        name: firewalld
+        state: restarted
+        enabled: yes
