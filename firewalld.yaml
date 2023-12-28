@@ -1,6 +1,6 @@
 ---
 - name: Configure Firewalld
-  hosts: your_target_hosts
+  hosts: localhost
   become: true  # Run tasks with elevated privileges
 
   tasks:
