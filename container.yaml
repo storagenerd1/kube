@@ -1,8 +1,0 @@
----
-- hosts: all
-  become: true
-  tasks:
-  - name: Install containerd.io
-    yum:
-      name: containerd.io
-      state: present
