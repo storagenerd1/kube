@@ -1,0 +1,42 @@
+---
+- name: Install Kubernetes
+  hosts: localhost
+  become: yes 
+
+  tasks:
+    - name: Create a file
+      ansible.builtin.file:
+        path: /etc/yum.repos.d/kubernetes.repo
+        state: touch
+
+    - name: Add contents to the file
+      ansible.builtin.blockinfile:
+        path: /etc/yum.repos.d/kubernetes.repo
+        block: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+
+    - name: Install Kubelet
+      yum:
+        name: kubelet
+        state: latest
+
+    - name: Install Kubeadm
+      yum:
+        name: kubeadm
+        state: latest
+
+    - name: Install Kubectl
+      yum:
+        name: kubectl 
+        state: latest
+
+    - name: Start Kubelet service
+      service:
+        name: kubelet
+        state: started
+        enabled: yes
