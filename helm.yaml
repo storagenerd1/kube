@@ -1,0 +1,26 @@
+---
+- name: Install Helm on CentOS
+  hosts: localhost
+  become: true  # Run tasks with elevated privileges
+
+#  vars:
+#    http_proxy: "http://172.31.0.1:3128"
+#    https_proxy: "http://172.31.0.1:3128"
+
+  tasks:
+    - name: Download Helm script
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+        dest: /tmp/get-helm-3
+        mode: '0755'
+
+    - name: Install Helm
+      ansible.builtin.command: /tmp/get-helm-3
+
+    - name: Verify Helm installation
+      ansible.builtin.command: helm version
+      register: helm_version_output
+
+    - name: Display Helm version
+      ansible.builtin.debug:
+        var: helm_version_output.stdout_lines
