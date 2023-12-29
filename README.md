@@ -15,5 +15,5 @@ kubectl apply -f pool.yaml
 kubectl create deploy nginx --image nginx:latest  
 kubectl expose deploy nginx --port 80 --type LoadBalancer  
 
-## If needed
+## Needed for single node cluster
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-  
