@@ -14,7 +14,7 @@ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io meta
 kubectl apply -f pool.yaml   
 kubectl create deploy nginx --image nginx:latest  
 kubectl expose deploy nginx --port 80 --type LoadBalancer  
-kubectl apply -f ingress.yaml
+kubectl apply -f ingress.yml
 
 ## Needed for single node cluster
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-  
