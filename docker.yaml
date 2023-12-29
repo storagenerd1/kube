@@ -35,9 +35,9 @@
         state: present
        
     - name: Delete the toml file
-        ansible.builtin.file:
-          path: /etc/containerd/config.toml
-          state: absent
+      file:
+        path: /etc/containerd/config.toml
+        state: absent
 
     - name: Start Docker service
       service:
