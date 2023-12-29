@@ -6,7 +6,7 @@ sudo kubeadm init --apiserver-advertise-address="`ip addr show| egrep "172.31|19
 mkdir -p $HOME/.kube  
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config  
 sudo chown $(id -u):$(id -g) $HOME/.kube/config  
-kubectl apply -f kube-flannel.yaml  
+kubectl apply -f kube-flannel.yml  
 helm repo add metallb https://metallb.github.io/metallb  
 helm repo update  
 helm install metallb metallb/metallb --kube-insecure-skip-tls-verify -n metallb-system --create-namespace  
@@ -14,6 +14,7 @@ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io meta
 kubectl apply -f pool.yaml   
 kubectl create deploy nginx --image nginx:latest  
 kubectl expose deploy nginx --port 80 --type LoadBalancer  
+kubectl apply -f ingress.yaml
 
 ## Needed for single node cluster
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-  
