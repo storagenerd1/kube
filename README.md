@@ -2,7 +2,7 @@
 Private Kubeconfig files
 To be used with centos8s or rhel8
 
-sudo kubeadm init --apiserver-advertise-address="`ip addr show| egrep "172.31|192.168"|awk '{print $2}'|sed 's_/.*__'`" --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --apiserver-advertise-address="`ip addr show| egrep "172.31|192.168"|awk '{print $2}'|sed 's_/.*__'`" --pod-network-cidr=10.244.0.0/16/n
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
