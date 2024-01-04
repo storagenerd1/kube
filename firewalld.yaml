@@ -53,6 +53,13 @@
         state: enabled
         immediate: yes
 
+    - name: Enable Masquerade
+      ansible.posix.firewalld:
+        masquerade: true
+        state: enabled
+        permanent: true
+        zone: public
+
     - name: Reload Firewalld to apply changes
       ansible.builtin.systemd:
         name: firewalld
