@@ -31,10 +31,24 @@
         permanent: yes
         state: enabled
         immediate: yes
-
+        
     - name: Add a rule to allow incoming traffic on port 7472
       ansible.builtin.firewalld:
         port: "7472/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+        
+    - name: Add a rule to allow incoming traffic on port 4096
+      ansible.builtin.firewalld:
+        port: "4096/tcp"
+        permanent: yes
+        state: enabled
+        immediate: yes
+
+    - name: Add a rule to allow incoming traffic on port 8472
+      ansible.builtin.firewalld:
+        port: "8472/tcp"
         permanent: yes
         state: enabled
         immediate: yes
