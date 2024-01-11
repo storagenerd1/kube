@@ -15,7 +15,7 @@
         mode: '0755'
 
     - name: Install Helm
-      ansible.builtin.command: /tmp/get-helm-3
+      ansible.builtin.command: bash /tmp/get-helm-3
 
     - name: Verify Helm installation
       ansible.builtin.command: helm version
