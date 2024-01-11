@@ -15,6 +15,9 @@ kubectl apply -f pool.yaml
 kubectl create deploy nginx --image nginx:latest  
 kubectl expose deploy nginx --port 80 --type LoadBalancer  
 kubectl apply -f ingress.yml
+containerd config default > /etc/containerd/config.toml
+grep SystemdCgroup /etc/containerd/config.toml (needs to be "true")
+
 
 ## Needed for single node cluster
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-  
