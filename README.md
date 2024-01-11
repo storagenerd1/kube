@@ -14,7 +14,7 @@ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io meta
 kubectl apply -f pool.yaml   
 kubectl create deploy nginx --image nginx:latest  
 kubectl expose deploy nginx --port 80 --type LoadBalancer  
-kubectl apply -f ingress.yml
+kubectl apply -f ingress.yml  
 containerd config default > /etc/containerd/config.toml  
 grep SystemdCgroup /etc/containerd/config.toml (needs to be "true")
 
