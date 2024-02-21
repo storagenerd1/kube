@@ -1,0 +1,28 @@
+---
+ - hosts: localhost
+   become: true
+   tasks:
+
+   - name: Add automation user
+     user:
+       name: ansiadm
+
+   - name: Add user to sudoers
+     copy:
+       dest: "/etc/sudoers.d/ansiadm"
+       content: "ansiadm  ALL=(ALL)  NOPASSWD: ALL"
+
+   - name: Create .ssh directory
+     file:
+       path: /home/ansiadm/.ssh
+       state: directory
+       owner: ansiadm
+       group: ansiadm
+
+   - name: Add public key to authorized_keys
+     copy:
+       dest: "/home/ansiadm/.ssh/authorized_keys"
+       content: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsz+zXpTz9ezVt8WsLREQdDULaJkF8v2ppmSlCNkjKwL8XSKagVGi5Lhu9kMgBJBRLTC/PpanmxUbWO6P51A6roY0HluEFTWH0HFde9izeStc+pStH1MMuuCaqL9+C06y8U/KVSKvbzQ+dEnSmPr53CaqUFSjgv65pSjMadWIrwBKX1YF4Ckby/XnsrHtio/1HmEFjORDHtzTXV0P4CN0CI5wxYWLBKf89LgRj34/9YlOFHl7KZ5scqajCKXJHuLYySfkw06c+LEwoU8NuHocK9KISwLsBslfQ1hYOA/fQJpRgY+/z3OVyxgAPeuCUZf/i329iXzHv7Y3r+U4zvy1jl45EWTdAvYPFL0X+4L+dGawqsXgXzehPQ4RFgDxGYnZv5yV7tONQWw9G6cKlCd4d02+hCVBDYoQI1QK8A7v+zKnQzN1LFyEwypNAgPgEZmo7c3V9noZ8lsrpnHuOVQWDT7vCJqdSPrDvQATNk6rgCvZPtPkMJh3ZD3f8yMFbapk= robert@rubby.soeting.net"
+       owner: ansiadm
+       group: ansiadm
+       mode: '0600'
