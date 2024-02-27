@@ -19,7 +19,7 @@
         name: lvm2
         state: latest
 
-    - name:
+    - name: Install nmap-ncat
       yum:
         name: nmap-ncat
         state: latest
@@ -45,7 +45,7 @@
         state: absent
 
     - name: Run containerd config command
-      command: containerd config default > /etc/containerd/config.toml
+      shell: containerd config default > /etc/containerd/config.toml
 
     - name: Replace "SystemdCgroup = false" with "SystemdCgroup = true"
       replace:
