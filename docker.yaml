@@ -19,6 +19,11 @@
         name: lvm2
         state: latest
 
+    - name:
+      yum:
+        name: nmap-ncat
+        state: latest
+
     - name: Add Docker repo
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -38,6 +43,15 @@
       file:
         path: /etc/containerd/config.toml
         state: absent
+
+    - name: Run containerd config command
+      command: containerd config default > /etc/containerd/config.toml
+
+    - name: Replace "SystemdCgroup = false" with "SystemdCgroup = true"
+      replace:
+        path: /etc/containerd/config.toml
+        regexp: 'SystemdCgroup = false'
+        replace: 'SystemdCgroup = true'
 
     - name: Start Docker service
       service:
